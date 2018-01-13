@@ -4,6 +4,22 @@ import math
 import sys
 
 
+def sign(x, y):
+    if abs(x - 0) < sys.float_info.epsilon:
+        return ""
+    elif abs(x - 0) > sys.float_info.epsilon:
+        if (x-0)<0:
+            if y:
+                return str(x) + "x"
+            else:
+                return str(x) + ""
+        else:
+            if y:
+                return "+"+str(x) + "x"
+            else:
+                return "+"+str(x) + ""
+
+
 def get_float(msg, allow_zero):
     x = None
     while x is None:
@@ -33,8 +49,8 @@ else:
         root = cmath.sqrt(discriminant)
     x1 = (-b + root) / (2 * a)
     x2 = (-b - root) / (2 * a)
-equation = ("{0}x\N{SUPERSCRIPT TWO}+{1}x+{2}=0"
-            "\N{RIGHTWARDS ARROW}x={3}").format(a, b, c, x1)
+equation = ("{0}x\N{SUPERSCRIPT TWO}" + sign(b,True) + sign(c,False) + "=0"
+                                                            "\N{RIGHTWARDS ARROW}x={1}").format(a, x1)
 if x2 is not None:
     equation += " or x={0}".format(x2)
 print(equation)
