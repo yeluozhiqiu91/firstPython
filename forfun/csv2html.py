@@ -3,7 +3,7 @@
 # 将testPython.csv作为输入文件，并将运行结果输出到testPython.html文件
 def main():
     maxWidth = 100
-    print_start()
+    print_start()  # 打印table开始标签
     count = 0
     while True:
         try:
@@ -18,7 +18,7 @@ def main():
             count += 1
         except EOFError:
             break
-    print_end()
+    print_end()  # 打印table结束标签
 
 
 def print_start():
@@ -46,36 +46,39 @@ def print_line(line, color, maxwidth):
                 if len(field) < maxwidth:
                     field = escape_html(field)
                 else:
-                    field="{0}...".format(escape_html(field[:maxwidth]))
+                    field = "{0}...".format(escape_html(field[:maxwidth]))
                 print("<td>{0}</td>".format(field))
     print("</tr>")
 
 
 def extract_fields(line):
-    fields=[]
-    field=""
-    quote=None
+    fields = []
+    field = ""
+    quote = None
     for c in line:
         if c in "\"":
             if quote is None:
-                quote=c
-            elif quote==c:
-                quote=None
+                quote = c
+            elif quote == c:
+                quote = None
             else:
-                quote+=c
+                quote += c
             continue
-        if quote is None and c==',':
+        if quote is None and c == ',':
             fields.append(field)
-            field=""
+            field = ""
         else:
-            field+=c
+            field += c
     if field:
         fields.append(field)
     return fields
 
+
 def escape_html(text):
-    text=text.replace("&","&amp;")
-    text=text.replace("<","&lt;")
-    text=text.replace(">","&gt;")
+    text = text.replace("&", "&amp;")
+    text = text.replace("<", "&lt;")
+    text = text.replace(">", "&gt;")
     return text
+
+
 main()
