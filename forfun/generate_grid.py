@@ -23,7 +23,7 @@ minimum = get_int("mininum (or Enter for 0)", -100000, 0)
 defaultmax = 1000  # 设置默认的最大值
 if defaultmax < minimum:
     defaultmax = minimum * 2
-maximum = get_int("maximum (or Enter for" + str(defaultmax) + "):",minimum, defaultmax)
+maximum = get_int("maximum (or Enter for " + str(defaultmax) + "):", minimum, defaultmax)
 row = 0
 while row < rows:
     line = ""
